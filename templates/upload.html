@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Upload Notes</title>
+    <title>AI Teacher Assistant</title>
 </head>
 <body>
 
-<h2>Upload Study Material</h2>
+<h2>Upload PDF Notes</h2>
 
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
 
     <button type="submit">
-        Upload
+        Upload & Generate Summary
     </button>
 </form>
 
 <hr>
 
-<h3>Uploaded Documents</h3>
+<h2>Uploaded Documents</h2>
 
-<ul>
 {% for doc in documents %}
-    <li>{{ doc.title }}</li>
+
+<h3>{{ doc.title }}</h3>
+
+<p>
+{{ doc.summary }}
+</p>
+
+<hr>
+
 {% endfor %}
-</ul>
 
 </body>
 </html>

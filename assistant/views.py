@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from .forms import UploadDocumentForm
 from .models import UploadedDocument
+from .gemini_utils import generate_summary
+from .voice_utils import extract_pdf_text
 
 
 def home(request):
@@ -53,7 +55,7 @@ def dashboard(request):
 
 def upload_document(request):
 
-    if request.method == 'POST':
+    if request.method == "POST":
 
         form = UploadDocumentForm(
             request.POST,
@@ -61,19 +63,32 @@ def upload_document(request):
         )
 
         if form.is_valid():
-            form.save()
+
+            document = form.save()
+
+            pdf_text = extract_pdf_text(
+                document.document.path
+            )
+
+            summary = generate_summary(
+                pdf_text[:10000]
+            )
+
+            document.summary = summary
+            document.save()
 
     else:
+
         form = UploadDocumentForm()
 
     documents = UploadedDocument.objects.all()
 
     return render(
         request,
-        'upload.html',
+        "upload.html",
         {
-            'form': form,
-            'documents': documents
+            "form": form,
+            "documents": documents
         }
     )
 

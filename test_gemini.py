@@ -1,10 +1,11 @@
-from assistant.gemini_utils import generate_summary
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
-sample_text = """
-Artificial Intelligence is a branch of computer science that enables
-machines to perform tasks that normally require human intelligence.
-"""
+load_dotenv()
 
-summary = generate_summary(sample_text)
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-print(summary)
+for model in genai.list_models():
+    if "generateContent" in model.supported_generation_methods:
+        print(model.name)

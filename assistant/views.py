@@ -70,12 +70,27 @@ def upload_document(request):
                 document.document.path
             )
 
-            summary = generate_summary(
-                pdf_text[:10000]
-            )
+            from .quiz_utils import generate_quiz
+
+            try:
+                summary = generate_summary(
+                    pdf_text[:10000]
+                )
+            except Exception as e:
+                summary = f"Summary Error: {str(e)}"
+
+            try:
+                quiz = generate_quiz(
+                    pdf_text[:10000]
+                )
+            except Exception as e:
+                quiz = f"Quiz Error: {str(e)}"
 
             document.summary = summary
+            document.quiz = quiz
             document.save()
+
+            return redirect('upload')
 
     else:
 
@@ -93,11 +108,29 @@ def upload_document(request):
     )
 
 def quiz_page(request):
-    return render(request, 'quiz.html')
+
+    documents = UploadedDocument.objects.all().order_by('-uploaded_at')
+
+    return render(
+        request,
+        'quiz.html',
+        {
+            'documents': documents
+        }
+    )
 
 
 def summary_page(request):
-    return render(request, 'summary.html')
+
+    documents = UploadedDocument.objects.all().order_by('-uploaded_at')
+
+    return render(
+        request,
+        'summary.html',
+        {
+            'documents': documents
+        }
+    )
 
 
 def profile_page(request):

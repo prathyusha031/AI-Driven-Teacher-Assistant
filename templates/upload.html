@@ -32,7 +32,11 @@
 
         <h4>{{ doc.title }}</h4>
 
+        {% if doc.summary %}
         <p>{{ doc.summary }}</p>
+    {% else %}
+        <p><strong>Summary not available.</strong></p>
+    {% endif %}
 
         <hr>
 

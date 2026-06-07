@@ -4,11 +4,29 @@
 
 <div class="card p-4">
 
-    <h2>AI Quiz Generator</h2>
+    <h2>AI Generated Quiz</h2>
 
-    <p>
-        Quiz generation feature will appear here.
-    </p>
+    <hr>
+
+    {% for doc in documents %}
+
+        {% if doc.quiz %}
+
+            <h4>{{ doc.title }}</h4>
+
+            <pre style="white-space: pre-wrap;">
+{{ doc.quiz }}
+            </pre>
+
+            <hr>
+
+        {% endif %}
+
+    {% empty %}
+
+        <p>No quiz generated yet.</p>
+
+    {% endfor %}
 
 </div>
 

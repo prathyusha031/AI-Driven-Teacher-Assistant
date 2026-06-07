@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from .forms import UploadDocumentForm
+from .models import UploadedDocument
 
 
 def home(request):
@@ -50,8 +52,30 @@ def dashboard(request):
 
 
 def upload_document(request):
-    return render(request, 'upload.html')
 
+    if request.method == 'POST':
+
+        form = UploadDocumentForm(
+            request.POST,
+            request.FILES
+        )
+
+        if form.is_valid():
+            form.save()
+
+    else:
+        form = UploadDocumentForm()
+
+    documents = UploadedDocument.objects.all()
+
+    return render(
+        request,
+        'upload.html',
+        {
+            'form': form,
+            'documents': documents
+        }
+    )
 
 def quiz_page(request):
     return render(request, 'quiz.html')

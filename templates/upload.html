@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Notes</title>
+</head>
+<body>
+
+<h2>Upload Study Material</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">
+        Upload
+    </button>
+</form>
+
+<hr>
+
+<h3>Uploaded Documents</h3>
+
+<ul>
+{% for doc in documents %}
+    <li>{{ doc.title }}</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>

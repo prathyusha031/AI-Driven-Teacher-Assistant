@@ -1,13 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>Welcome to AI Teacher Assistant Dashboard</h1>
+{% block content %}
 
-<p>Login Successful!</p>
+<h2 class="mb-4">Student Dashboard</h2>
 
-</body>
-</html>
+<div class="row">
+
+    <div class="col-md-4">
+
+        <div class="card p-4 text-center">
+
+            <h3>📄</h3>
+
+            <h5>Upload Notes</h5>
+
+            <a href="/upload/" class="btn btn-primary mt-2">
+                Open
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card p-4 text-center">
+
+            <h3>📝</h3>
+
+            <h5>Generate Summary</h5>
+
+            <a href="/summary/" class="btn btn-success mt-2">
+                Open
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card p-4 text-center">
+
+            <h3>🎯</h3>
+
+            <h5>AI Quiz</h5>
+
+            <a href="/quiz/" class="btn btn-warning mt-2">
+                Open
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

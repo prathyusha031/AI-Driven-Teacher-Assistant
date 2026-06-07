@@ -1,36 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Teacher Assistant</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h2>Upload PDF Notes</h2>
+{% block content %}
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
+<div class="card p-4">
 
-    <button type="submit">
-        Upload & Generate Summary
-    </button>
-</form>
+    <h2>Upload PDF Notes</h2>
 
-<hr>
+    <form method="POST" enctype="multipart/form-data">
 
-<h2>Uploaded Documents</h2>
+        {% csrf_token %}
 
-{% for doc in documents %}
+        {{ form.as_p }}
 
-<h3>{{ doc.title }}</h3>
+        <button type="submit" class="btn btn-success">
+            Upload & Generate Summary
+        </button>
 
-<p>
-{{ doc.summary }}
-</p>
+    </form>
 
-<hr>
+</div>
 
-{% endfor %}
+<br>
 
-</body>
-</html>
+<div class="card p-4">
+
+    <h2>Uploaded Documents</h2>
+
+    <hr>
+
+    {% for doc in documents %}
+
+        <h4>{{ doc.title }}</h4>
+
+        <p>{{ doc.summary }}</p>
+
+        <hr>
+
+    {% empty %}
+
+        <p>No documents uploaded yet.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

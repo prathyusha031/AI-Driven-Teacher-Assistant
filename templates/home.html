@@ -1,10 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>AI Teacher Assistant</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card p-5 text-center">
+
     <h1>Welcome to AI Teacher Assistant</h1>
-    <p>Your AI-powered learning companion.</p>
-</body>
-</html>
+
+    <p class="lead mt-3">
+        Upload study materials, generate summaries,
+        create quizzes and improve learning with AI.
+    </p>
+
+    <a href="/upload/" class="btn btn-primary btn-lg mt-3">
+        Start Learning
+    </a>
+
+</div>
+
+{% endblock %}

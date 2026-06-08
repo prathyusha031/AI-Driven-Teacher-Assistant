@@ -109,13 +109,19 @@ def upload_document(request):
 
 def quiz_page(request):
 
+    score = None
+
+    if request.method == "POST":
+        score = request.POST.get("score")
+
     documents = UploadedDocument.objects.all().order_by('-uploaded_at')
 
     return render(
         request,
         'quiz.html',
         {
-            'documents': documents
+            'documents': documents,
+            'score': score
         }
     )
 

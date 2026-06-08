@@ -18,6 +18,42 @@
 {{ doc.quiz }}
             </pre>
 
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <label>Enter Your Score (Out of 5):</label>
+
+                <input
+                    type="number"
+                    name="score"
+                    min="0"
+                    max="5"
+                    class="form-control"
+                    required
+                >
+
+                <br>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Submit Score
+                </button>
+
+            </form>
+
+            {% if score %}
+
+            <div class="alert alert-success mt-3">
+
+                <h4>Your Score: {{ score }}/5</h4>
+
+            </div>
+
+            {% endif %}
+
             <hr>
 
         {% endif %}

@@ -14,53 +14,87 @@
 
             <h4>{{ doc.title }}</h4>
 
-            <pre style="white-space: pre-wrap;">
-{{ doc.quiz }}
-            </pre>
-
             <form method="POST">
 
                 {% csrf_token %}
 
-                <label>Enter Your Score (Out of 5):</label>
-
                 <input
-                    type="number"
-                    name="score"
-                    min="0"
-                    max="5"
-                    class="form-control"
-                    required
+                    type="hidden"
+                    name="doc_id"
+                    value="{{ doc.id }}"
                 >
 
-                <br>
+                {% for question in doc.parsed_questions %}
+
+                    <div class="mb-4">
+
+                        <pre style="white-space: pre-wrap;">
+{{ question }}
+                        </pre>
+
+                        <label>
+                            <input type="radio"
+                                   name="q{{ forloop.counter }}"
+                                   value="A"
+                                   required>
+                            A
+                        </label>
+
+                        <br>
+
+                        <label>
+                            <input type="radio"
+                                   name="q{{ forloop.counter }}"
+                                   value="B">
+                            B
+                        </label>
+
+                        <br>
+
+                        <label>
+                            <input type="radio"
+                                   name="q{{ forloop.counter }}"
+                                   value="C">
+                            C
+                        </label>
+
+                        <br>
+
+                        <label>
+                            <input type="radio"
+                                   name="q{{ forloop.counter }}"
+                                   value="D">
+                            D
+                        </label>
+
+                    </div>
+
+                {% endfor %}
 
                 <button
                     type="submit"
                     class="btn btn-primary"
                 >
-                    Submit Score
+                    Submit Quiz
                 </button>
 
             </form>
 
-            {% if score %}
+            {% if score is not None %}
 
-            <div class="alert alert-success mt-3">
+                <div class="alert alert-success mt-3">
 
-                <h4>Your Score: {{ score }}/5</h4>
+                    <h4>Your Score: {{ score }}/5</h4>
 
-            </div>
+                    <h4>Percentage: {{ percentage }}%</h4>
+
+                </div>
 
             {% endif %}
 
             <hr>
 
         {% endif %}
-
-    {% empty %}
-
-        <p>No quiz generated yet.</p>
 
     {% endfor %}
 

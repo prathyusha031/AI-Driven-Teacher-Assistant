@@ -127,3 +127,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+GEMINI_API_KEY = os.getenv(
+    "GEMINI_API_KEY"
+)

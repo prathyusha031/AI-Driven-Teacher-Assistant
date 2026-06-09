@@ -10,4 +10,5 @@ urlpatterns = [
     path('quiz/', views.quiz_page, name='quiz'),
     path('summary/', views.summary_page, name='summary'),
     path('profile/', views.profile_page, name='profile'),
+    path('quiz-results/',views.quiz_results,name='quiz_results'),
 ]

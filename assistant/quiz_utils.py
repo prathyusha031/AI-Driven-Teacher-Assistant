@@ -1,29 +1,37 @@
 import google.generativeai as genai
 import os
 
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(
+    api_key=os.getenv("GEMINI_API_KEY")
+)
 
 def generate_quiz(text):
 
-    model = genai.GenerativeModel("gemini-2.5-flash")
-    
+    model = genai.GenerativeModel(
+        "gemini-2.5-flash"
+    )
+
     prompt = f"""
-    Create 5 multiple-choice questions from the following text.
+Create 5 multiple-choice questions from the following text.
 
-    Format:
+Format:
 
-    Q1.
-    A)
-    B)
-    C)
-    D)
+Q1.
+Question
 
-    Answer:
+A)
+B)
+C)
+D)
 
-    Text:
-    {text}
-    """
+Do NOT show the answers.
 
-    response = model.generate_content(prompt)
+Text:
+{text}
+"""
+
+    response = model.generate_content(
+        prompt
+    )
 
     return response.text

@@ -236,6 +236,10 @@ This project helped in gaining practical experience in:
 
 ---
 
+## Live Demo
+
+https://ai-teacher-assistant-qazo.onrender.com
+
 ## Author
 
 Bailapudi Prathyusha

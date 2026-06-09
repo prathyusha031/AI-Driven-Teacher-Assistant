@@ -11,4 +11,8 @@ urlpatterns = [
     path('summary/', views.summary_page, name='summary'),
     path('profile/', views.profile_page, name='profile'),
     path('quiz-results/',views.quiz_results,name='quiz_results'),
+    path('start-learning/',views.start_learning,name='start_learning'),
+    path('logout/', views.logout_view, name='logout'),
+    path('chat/',views.chat_page,name='chat'),
+    path('download-summary/<int:doc_id>/',views.download_summary,name='download_summary'),
 ]

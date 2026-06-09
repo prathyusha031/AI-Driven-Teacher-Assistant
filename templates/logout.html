@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card p-5 text-center">
+
+    <h1 class="mb-3">Session Ended</h1>
+
+    <p class="lead">
+        You have successfully logged out of the AI Teacher Assistant platform.
+    </p>
+
+    <p class="text-muted">
+        Thank you for using the application. You can sign in again to continue
+        accessing your uploaded documents, AI-generated summaries, quizzes,
+        and learning resources.
+    </p>
+
+    <div class="mt-4">
+
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2">
+            Log In Again
+        </a>
+
+        <a href="{% url 'home' %}" class="btn btn-outline-secondary btn-lg">
+            Return to Home
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -7,6 +7,21 @@ from .gemini_utils import generate_summary
 from .voice_utils import extract_pdf_text
 from .utils import extract_answers, parse_quiz
 import re
+from django.contrib.auth import logout
+from .chat_utils import ask_question
+from django.http import HttpResponse
+from reportlab.pdfgen import canvas
+
+
+
+def logout_view(request):
+
+    logout(request)
+
+    return render(
+        request,
+        "logout.html"
+    )
 
 def home(request):
     return render(request, 'home.html')
@@ -50,41 +65,42 @@ def login_view(request):
 
     return render(request, 'login.html')
 
+from .models import UploadedDocument
+
 def dashboard(request):
 
-    total_documents = UploadedDocument.objects.count()
+    documents = UploadedDocument.objects.all()
 
-    total_quizzes = QuizResult.objects.count()
+    total_documents = documents.count()
+
+    total_summaries = documents.exclude(
+        summary__isnull=True
+    ).count()
+
+    total_quizzes = documents.exclude(
+        quiz__isnull=True
+    ).count()
 
     average_score = 0
-    highest_score = 0
 
-    if total_quizzes > 0:
+    if documents.exists():
 
         average_score = round(
-            sum(
-                result.percentage
-                for result in QuizResult.objects.all()
-            ) / total_quizzes,
+            sum(doc.score for doc in documents)
+            / total_documents,
             2
-        )
-
-        highest_score = max(
-            result.percentage
-            for result in QuizResult.objects.all()
         )
 
     return render(
         request,
-        'dashboard.html',
+        "dashboard.html",
         {
-            'total_documents': total_documents,
-            'total_quizzes': total_quizzes,
-            'average_score': average_score,
-            'highest_score': highest_score,
+            "total_documents": total_documents,
+            "total_summaries": total_summaries,
+            "total_quizzes": total_quizzes,
+            "average_score": average_score,
         }
     )
-
 
 def upload_document(request):
 
@@ -119,8 +135,11 @@ def upload_document(request):
             except Exception as e:
                 quiz = f"Quiz Error: {str(e)}"
 
+            document.pdf_text = pdf_text
+
             document.summary = summary
             document.quiz = quiz
+            document.pdf_text = pdf_text
             document.save()
 
             return redirect('upload')
@@ -234,3 +253,87 @@ def quiz_results(request):
             'results': results
         }
     )
+
+def start_learning(request):
+
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
+    return redirect('login')
+
+def chat_page(request):
+
+    answer = ""
+
+    documents = UploadedDocument.objects.all().order_by(
+        '-uploaded_at'
+    )
+
+    if request.method == "POST":
+
+        doc_id = request.POST.get("doc_id")
+
+        question = request.POST.get("question")
+
+        document = UploadedDocument.objects.get(
+            id=doc_id
+        )
+
+        answer = ask_question(
+            document.pdf_text,
+            question
+        )
+
+    return render(
+        request,
+        "chat.html",
+        {
+            "documents": documents,
+            "answer": answer
+        }
+    )
+
+
+def download_summary(request, doc_id):
+
+    document = UploadedDocument.objects.get(
+        id=doc_id
+    )
+
+    response = HttpResponse(
+        content_type='application/pdf'
+    )
+
+    response[
+        'Content-Disposition'
+    ] = f'attachment; filename="{document.title}.pdf"'
+
+    p = canvas.Canvas(response)
+
+    y = 800
+
+    p.drawString(
+        50,
+        y,
+        f"Summary: {document.title}"
+    )
+
+    y -= 40
+
+    for line in document.summary.split('\n'):
+
+        p.drawString(
+            50,
+            y,
+            line[:100]
+        )
+
+        y -= 20
+
+        if y < 50:
+            p.showPage()
+            y = 800
+
+    p.save()
+
+    return response

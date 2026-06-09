@@ -19,13 +19,14 @@ class UploadedDocument(models.Model):
         null=True
     )
 
-    score = models.IntegerField(
-        default=0
+    pdf_text = models.TextField(
+        blank=True,
+        null=True
     )
 
-    percentage = models.FloatField(
-        default=0
-    )
+    score = models.IntegerField(default=0)
+
+    percentage = models.FloatField(default=0)
 
     uploaded_at = models.DateTimeField(
         auto_now_add=True

@@ -2,48 +2,36 @@
 
 {% block content %}
 
-<div class="container mt-4">
+<h2 class="mb-4">Dashboard</h2>
 
-    <h2>Dashboard</h2>
+<div class="row">
 
-    <div class="row">
-
-        <div class="col-md-3">
-
-            <div class="card p-3 text-center">
-                <h4>Total PDFs</h4>
-                <h2>{{ total_documents }}</h2>
-            </div>
-
+    <div class="col-md-3">
+        <div class="card p-3 text-center">
+            <h2>{{ total_documents }}</h2>
+            <p>Documents</p>
         </div>
+    </div>
 
-        <div class="col-md-3">
-
-            <div class="card p-3 text-center">
-                <h4>Quiz Attempts</h4>
-                <h2>{{ total_quizzes }}</h2>
-            </div>
-
+    <div class="col-md-3">
+        <div class="card p-3 text-center">
+            <h2>{{ total_summaries }}</h2>
+            <p>Summaries</p>
         </div>
+    </div>
 
-        <div class="col-md-3">
-
-            <div class="card p-3 text-center">
-                <h4>Average Score</h4>
-                <h2>{{ average_score }}%</h2>
-            </div>
-
+    <div class="col-md-3">
+        <div class="card p-3 text-center">
+            <h2>{{ total_quizzes }}</h2>
+            <p>Quizzes</p>
         </div>
+    </div>
 
-        <div class="col-md-3">
-
-            <div class="card p-3 text-center">
-                <h4>Highest Score</h4>
-                <h2>{{ highest_score }}%</h2>
-            </div>
-
+    <div class="col-md-3">
+        <div class="card p-3 text-center">
+            <h2>{{ average_score }}</h2>
+            <p>Average Score</p>
         </div>
-
     </div>
 
 </div>

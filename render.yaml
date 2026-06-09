@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: ai-teacher-assistant
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn ai_teacher.wsgi:application"

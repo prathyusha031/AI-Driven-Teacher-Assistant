@@ -21,38 +21,45 @@ The platform is designed to reduce study time, improve understanding, and provid
 ## Features
 
 ### User Authentication
+
 - User Registration
 - Login System
 - Logout Functionality
 - Profile Page
 
 ### Document Processing
+
 - PDF Upload
 - PDF Text Extraction
 - Study Material Storage
 
 ### AI Summary Generation
+
 - Automatic content summarization
 - Easy-to-read study notes
 - Quick revision support
 
 ### AI Quiz Generation
+
 - Automatic MCQ creation
 - Multiple-choice questions
 - AI-generated answer keys
 
 ### Quiz Evaluation
+
 - Quiz submission
 - Automatic score calculation
 - Percentage calculation
 - Quiz performance tracking
 
 ### AI Learning Assistant
+
 - AI-powered chatbot
 - Question answering support
 - Learning assistance from uploaded content
 
 ### Dashboard
+
 - Centralized navigation
 - Document management
 - Learning progress overview
@@ -62,22 +69,27 @@ The platform is designed to reduce study time, improve understanding, and provid
 ## Tech Stack
 
 ### Backend
+
 - Python
 - Django
 
 ### Artificial Intelligence
+
 - Google Gemini AI
 
 ### Database
+
 - SQLite
 
 ### Frontend
+
 - HTML
 - CSS
 - Bootstrap 5
 - JavaScript
 
 ### Other Libraries
+
 - PyPDF2
 - python-dotenv
 - Google Generative AI SDK
@@ -197,36 +209,6 @@ http://127.0.0.1:8000/
 8. User interacts with the AI learning assistant.
 9. Learning progress can be reviewed through the dashboard.
 
----
-
-## Screenshots
-
-### Home Page
-(Add screenshot here)
-
-### Login Page
-(Add screenshot here)
-
-### Dashboard
-(Add screenshot here)
-
-### PDF Upload
-(Add screenshot here)
-
-### AI Summary Generation
-(Add screenshot here)
-
-### AI Quiz Generation
-(Add screenshot here)
-
-### Quiz Results
-(Add screenshot here)
-
-### AI Chat Assistant
-(Add screenshot here)
-
----
-
 ## Future Enhancements
 
 - Voice-based learning assistant
@@ -256,7 +238,7 @@ This project helped in gaining practical experience in:
 
 ## Author
 
-**Bailapudi Prathyusha**
+Bailapudi Prathyusha
 
 B.Tech – Computer Science and Engineering (Data Science)
 
@@ -270,4 +252,4 @@ LinkedIn:
 
 ## License
 
-This project is licensed under the MIT License.
+MIT

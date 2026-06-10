@@ -137,7 +137,6 @@ def upload_document(request):
             except Exception as e:
                 quiz = f"Quiz Error: {str(e)}"
 
-            document.pdf_text = pdf_text
 
             document.summary = summary
             document.quiz = quiz

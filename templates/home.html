@@ -2,19 +2,199 @@
 
 {% block content %}
 
-<div class="card p-5 text-center">
+<div class="hero text-center mb-4">
 
-    <h1>Welcome to AI Teacher Assistant</h1>
+    <h1 class="display-4">
+        AI-Driven Teacher Assistant
+    </h1>
 
     <p class="lead mt-3">
-        Upload study materials, generate summaries,
-        create quizzes and improve learning with AI.
+        Transform study materials into summaries, quizzes,
+        and interactive AI-powered learning experiences.
     </p>
 
-    <a href="{% url 'login' %}" class="btn btn-primary btn-lg mt-3">
-        Start Learning
-    </a>
+    <div class="mt-4">
+
+        <a href="/upload/" class="btn btn-primary btn-lg me-2">
+            Get Started
+        </a>
+
+        <a href="/dashboard/" class="btn btn-outline-primary btn-lg">
+            View Dashboard
+        </a>
+
+    </div>
 
 </div>
 
+<div class="row">
+
+    <div class="col-md-4">
+
+        <div class="card p-4 h-100 text-center">
+
+            <h3>📄 Upload Notes</h3>
+
+            <p>
+                Upload PDF study materials and let AI analyze
+                the content instantly.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card p-4 h-100 text-center">
+
+            <h3>📝 AI Summaries</h3>
+
+            <p>
+                Generate concise summaries from lengthy notes
+                to improve revision efficiency.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card p-4 h-100 text-center">
+
+            <h3>🧠 Smart Quizzes</h3>
+
+            <p>
+                Automatically create quizzes and evaluate
+                learning performance.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <div class="card p-4 h-100 text-center">
+
+            <h3>💬 AI Chat</h3>
+
+            <p>
+                Ask questions directly from uploaded notes
+                and receive contextual answers.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card p-4 h-100 text-center">
+
+            <h3>📊 Analytics</h3>
+
+            <p>
+                Track quiz scores, performance metrics,
+                and learning progress.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="card p-4 h-100 text-center">
+
+            <h3>📥 Export Results</h3>
+
+            <p>
+                Download AI-generated summaries for future
+                study and revision.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card p-5">
+
+    <h2 class="text-center mb-4">
+        How It Works
+    </h2>
+
+    <div class="row text-center">
+
+        <div class="col-md-3">
+
+            <h1>1️⃣</h1>
+
+            <h5>Upload Notes</h5>
+
+            <p>Upload PDF study materials.</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <h1>2️⃣</h1>
+
+            <h5>Generate Summary</h5>
+
+            <p>AI creates concise notes.</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <h1>3️⃣</h1>
+
+            <h5>Take Quiz</h5>
+
+            <p>Test understanding instantly.</p>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <h1>4️⃣</h1>
+
+            <h5>Chat With AI</h5>
+
+            <p>Ask questions from your notes.</p>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="card p-4 text-center">
+
+    <h4>AI-Driven Teacher Assistant</h4>
+
+    <p>
+        An intelligent learning platform that leverages
+        Artificial Intelligence and Natural Language Processing
+        to transform study materials into summaries,
+        quizzes, and interactive learning experiences.
+    </p>
+
+    <p>
+        Powered by Django, Gemini AI, NLP, SQLite,
+        and deployed on Render.
+    </p>
+
+</div>
 {% endblock %}

@@ -237,13 +237,15 @@ def quiz_page(request):
 
 def summary_page(request):
 
-    documents = UploadedDocument.objects.all().order_by('-uploaded_at')
+    documents = UploadedDocument.objects.exclude(
+        summary=""
+    ).order_by("-uploaded_at")
 
     return render(
         request,
-        'summary.html',
+        "summary.html",
         {
-            'documents': documents
+            "documents": documents
         }
     )
 

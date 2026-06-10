@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from .forms import UploadDocumentForm
-from .models import UploadedDocument, QuizResult
+from .models import UploadedDocument, QuizResult, ChatHistory
 from .gemini_utils import generate_summary
 from .voice_utils import extract_pdf_text
 from .utils import extract_answers, parse_quiz
@@ -11,6 +11,7 @@ from django.contrib.auth import logout
 from .chat_utils import ask_question
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
+from django.db.models import Avg, Max
 
 
 
@@ -71,34 +72,35 @@ def dashboard(request):
 
     documents = UploadedDocument.objects.all()
 
-    total_documents = documents.count()
+    documents_count = UploadedDocument.objects.count()
 
-    total_summaries = documents.exclude(
-        summary__isnull=True
-    ).count()
+    quiz_count = QuizResult.objects.count()
 
-    total_quizzes = documents.exclude(
-        quiz__isnull=True
-    ).count()
+    chat_count = ChatHistory.objects.count()
 
-    average_score = 0
+    average_score = QuizResult.objects.aggregate(
+        Avg("percentage")
+    )["percentage__avg"] or 0
 
-    if documents.exists():
-
-        average_score = round(
-            sum(doc.score for doc in documents)
-            / total_documents,
-            2
-        )
+    highest_score = QuizResult.objects.aggregate(
+        Max("percentage")
+    )["percentage__max"] or 0
 
     return render(
         request,
         "dashboard.html",
         {
-            "total_documents": total_documents,
-            "total_summaries": total_summaries,
-            "total_quizzes": total_quizzes,
+            "documents": documents,
+
+            "documents_count": documents_count,
+
+            "quiz_count": quiz_count,
+
+            "chat_count": chat_count,
+
             "average_score": average_score,
+
+            "highest_score": highest_score,
         }
     )
 
@@ -162,7 +164,9 @@ def upload_document(request):
 
 def quiz_page(request):
 
-    documents = UploadedDocument.objects.all().order_by('-uploaded_at')
+    documents = UploadedDocument.objects.all().order_by(
+        '-uploaded_at'
+    )
 
     score = None
     percentage = None
@@ -201,17 +205,25 @@ def quiz_page(request):
             user_answers,
             correct_answers
         ):
+
             if user == correct:
                 score += 1
 
-        percentage = round(
-            (score / len(correct_answers)) * 100,
-            2
-        )
+        if len(correct_answers) > 0:
+
+            percentage = round(
+                (score / len(correct_answers)) * 100,
+                2
+            )
+
+        else:
+
+            percentage = 0
+
         QuizResult.objects.create(
-          document=document,
-          score=score,
-          percentage=percentage
+            document=document,
+            score=score,
+            percentage=percentage
         )
 
     return render(
@@ -263,16 +275,13 @@ def start_learning(request):
 
 def chat_page(request):
 
-    answer = ""
+    documents = UploadedDocument.objects.all()
 
-    documents = UploadedDocument.objects.all().order_by(
-        '-uploaded_at'
-    )
+    answer = None
 
     if request.method == "POST":
 
         doc_id = request.POST.get("doc_id")
-
         question = request.POST.get("question")
 
         document = UploadedDocument.objects.get(
@@ -284,15 +293,25 @@ def chat_page(request):
             question
         )
 
+        ChatHistory.objects.create(
+            document=document,
+            question=question,
+            answer=answer
+        )
+
+    history = ChatHistory.objects.order_by(
+        "-created_at"
+    )[:10]
+
     return render(
         request,
         "chat.html",
         {
             "documents": documents,
-            "answer": answer
+            "answer": answer,
+            "history": history
         }
     )
-
 
 def download_summary(request, doc_id):
 

@@ -6,6 +6,10 @@
 
     <h2>AI Chat With Notes</h2>
 
+    <p>
+        Select uploaded notes and ask questions based on the document content.
+    </p>
+
     <form method="POST">
 
         {% csrf_token %}
@@ -63,6 +67,41 @@
     </div>
 
     {% endif %}
+
+</div>
+
+<br>
+
+<div class="card p-4">
+
+    <h3>Recent Questions</h3>
+
+    {% for chat in history %}
+
+    <div class="card p-3 mb-3">
+
+        <p>
+            <strong>Question:</strong>
+            {{ chat.question }}
+        </p>
+
+        <div class="alert alert-light">
+
+            {{ chat.answer|linebreaks }}
+
+        </div>
+
+        <small class="text-muted">
+            {{ chat.created_at }}
+        </small>
+
+    </div>
+
+    {% empty %}
+
+    <p>No chat history available.</p>
+
+    {% endfor %}
 
 </div>
 

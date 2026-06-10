@@ -2,37 +2,79 @@
 
 {% block content %}
 
-<h2 class="mb-4">Dashboard</h2>
+<h2 class="mb-4">AI Teacher Assistant Dashboard</h2>
 
-<div class="row">
+<div class="row mb-4">
 
     <div class="col-md-3">
         <div class="card p-3 text-center">
-            <h2>{{ total_documents }}</h2>
-            <p>Documents</p>
+            <h2>{{ documents_count }}</h2>
+            <p>Total Documents</p>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card p-3 text-center">
-            <h2>{{ total_summaries }}</h2>
-            <p>Summaries</p>
+            <h2>{{ quiz_count }}</h2>
+            <p>Quizzes Attempted</p>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card p-3 text-center">
-            <h2>{{ total_quizzes }}</h2>
-            <p>Quizzes</p>
-        </div>
-    </div>
-
-    <div class="col-md-3">
-        <div class="card p-3 text-center">
-            <h2>{{ average_score }}</h2>
+            <h2>{{ average_score|floatformat:1 }}%</h2>
             <p>Average Score</p>
         </div>
     </div>
+
+    <div class="col-md-3">
+        <div class="card p-3 text-center">
+            <h2>{{ chat_count }}</h2>
+            <p>AI Questions</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="row mb-4">
+
+    <div class="col-md-6">
+        <div class="card p-4 text-center">
+            <h2>{{ highest_score|floatformat:1 }}%</h2>
+            <p>Highest Quiz Score</p>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card p-4 text-center">
+            <h2>{{ documents_count }}</h2>
+            <p>Learning Resources Uploaded</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="card p-4">
+
+    <h3>Platform Features</h3>
+
+    <ul class="mt-3">
+
+        <li>Upload PDF Study Materials</li>
+
+        <li>AI Generated Summaries</li>
+
+        <li>AI Generated Quizzes</li>
+
+        <li>Quiz Scoring & Performance Tracking</li>
+
+        <li>Chat With Uploaded Notes Using Gemini AI</li>
+
+        <li>Download Study Summaries</li>
+
+        <li>Learning Analytics Dashboard</li>
+
+    </ul>
 
 </div>
 

@@ -36,10 +36,7 @@ Study Material:
         return response.text
 
     except Exception as e:
-
-        print("SUMMARY ERROR:", e)
-
-        return (
-            "Gemini API quota exceeded or service unavailable. "
-            "Please try again later."
-        )
+     
+     print("SUMMARY ERROR:", e)
+    
+    return str(e)

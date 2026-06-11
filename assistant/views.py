@@ -176,11 +176,15 @@ def quiz_page(request):
 
     for doc in documents:
 
-        if doc.quiz:
+     if doc.quiz:
 
-            doc.parsed_questions = parse_quiz(
-                doc.quiz
-            )
+        doc.parsed_questions = parse_quiz(doc.quiz)
+
+        print("QUIZ TEXT:")
+        print(doc.quiz)
+
+        print("PARSED:")
+        print(doc.parsed_questions)
 
     if request.method == "POST":
 

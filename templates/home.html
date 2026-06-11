@@ -2,40 +2,75 @@
 
 {% block content %}
 
-<div class="hero text-center mb-4">
+<div class="hero text-center mb-5">
 
-    <h1 class="display-4">
-        AI-Driven Teacher Assistant
+    <h1 class="display-4 fw-bold">
+        AI-Powered Teacher Assistant
     </h1>
 
     <p class="lead mt-3">
-        Transform study materials into summaries, quizzes,
-        and interactive AI-powered learning experiences.
+        An intelligent learning platform that transforms study materials into
+        AI-generated summaries, quizzes, and interactive learning experiences
+        using Natural Language Processing and Gemini AI.
     </p>
 
     <div class="mt-4">
 
-        <a href="/upload/" class="btn btn-primary btn-lg me-2">
-            Get Started
+        {% if user.is_authenticated %}
+
+        <a href="/upload/" class="btn btn-light btn-lg me-2">
+           Get Started
         </a>
 
+        {% else %}
+
+        <a href="/login/" class="btn btn-light btn-lg me-2">
+           Get Started
+        </a>
+
+        {% endif %}
+        
         <a href="/dashboard/" class="btn btn-outline-light btn-lg">
             View Dashboard
         </a>
 
     </div>
 
+    <div class="mt-4">
+
+        <span class="badge bg-light text-dark p-2 me-2">
+            Django
+        </span>
+
+        <span class="badge bg-light text-dark p-2 me-2">
+            Gemini AI
+        </span>
+
+        <span class="badge bg-light text-dark p-2 me-2">
+            NLP
+        </span>
+
+        <span class="badge bg-light text-dark p-2 me-2">
+            SQLite
+        </span>
+
+        <span class="badge bg-light text-dark p-2 me-2">
+            Python
+        </span>
+
+    </div>
+
 </div>
 
-<div class="row">
+<div class="row g-4">
 
     <div class="col-md-4">
         <a href="/upload/" style="text-decoration:none;color:inherit;">
             <div class="card p-4 h-100 text-center">
                 <h3>📄 Upload Notes</h3>
                 <p>
-                    Upload PDF study materials and let AI analyze
-                    the content instantly.
+                    Upload PDF study materials and automatically extract,
+                    analyze, and process learning content.
                 </p>
             </div>
         </a>
@@ -46,8 +81,8 @@
             <div class="card p-4 h-100 text-center">
                 <h3>📝 AI Summaries</h3>
                 <p>
-                    Generate concise summaries from lengthy notes
-                    to improve revision efficiency.
+                    Generate concise AI-powered summaries from lengthy
+                    educational materials for faster revision.
                 </p>
             </div>
         </a>
@@ -58,8 +93,8 @@
             <div class="card p-4 h-100 text-center">
                 <h3>🧠 Smart Quizzes</h3>
                 <p>
-                    Automatically create quizzes and evaluate
-                    learning performance.
+                    Automatically generate quizzes and evaluate
+                    understanding with instant scoring.
                 </p>
             </div>
         </a>
@@ -69,15 +104,15 @@
 
 <br>
 
-<div class="row">
+<div class="row g-4">
 
     <div class="col-md-4">
         <a href="/chat/" style="text-decoration:none;color:inherit;">
             <div class="card p-4 h-100 text-center">
                 <h3>💬 AI Chat</h3>
                 <p>
-                    Ask questions directly from uploaded notes
-                    and receive contextual answers.
+                    Interact with uploaded notes using Gemini AI and
+                    receive contextual answers instantly.
                 </p>
             </div>
         </a>
@@ -86,22 +121,22 @@
     <div class="col-md-4">
         <a href="/dashboard/" style="text-decoration:none;color:inherit;">
             <div class="card p-4 h-100 text-center">
-                <h3>📊 Analytics</h3>
+                <h3>📊 Learning Analytics</h3>
                 <p>
-                    Track quiz scores, performance metrics,
-                    and learning progress.
+                    Monitor quiz scores, learning performance,
+                    AI interactions, and study progress.
                 </p>
             </div>
         </a>
     </div>
 
     <div class="col-md-4">
-        <a href="/dashboard/" style="text-decoration:none;color:inherit;">
+        <a href="/summary/" style="text-decoration:none;color:inherit;">
             <div class="card p-4 h-100 text-center">
                 <h3>📥 Export Results</h3>
                 <p>
-                    Download AI-generated summaries for future
-                    study and revision.
+                    Download AI-generated summaries and learning
+                    resources for future revision.
                 </p>
             </div>
         </a>
@@ -122,25 +157,59 @@
         <div class="col-md-3">
             <h1>1️⃣</h1>
             <h5>Upload Notes</h5>
-            <p>Upload PDF study materials.</p>
+            <p>Upload educational PDF documents.</p>
         </div>
 
         <div class="col-md-3">
             <h1>2️⃣</h1>
             <h5>Generate Summary</h5>
-            <p>AI creates concise notes.</p>
+            <p>AI creates concise learning notes.</p>
         </div>
 
         <div class="col-md-3">
             <h1>3️⃣</h1>
             <h5>Take Quiz</h5>
-            <p>Test understanding instantly.</p>
+            <p>Evaluate understanding through quizzes.</p>
         </div>
 
         <div class="col-md-3">
             <h1>4️⃣</h1>
             <h5>Chat With AI</h5>
-            <p>Ask questions from your notes.</p>
+            <p>Ask questions and learn interactively.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card p-5 text-center">
+
+    <h3 class="mb-3">
+        Project Highlights
+    </h3>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <h2>🤖</h2>
+            <h5>Gemini AI</h5>
+        </div>
+
+        <div class="col-md-3">
+            <h2>📚</h2>
+            <h5>NLP Processing</h5>
+        </div>
+
+        <div class="col-md-3">
+            <h2>📊</h2>
+            <h5>Performance Analytics</h5>
+        </div>
+
+        <div class="col-md-3">
+            <h2>🎯</h2>
+            <h5>Personalized Learning</h5>
         </div>
 
     </div>
@@ -151,18 +220,19 @@
 
 <div class="card p-4 text-center">
 
-    <h4>AI-Driven Teacher Assistant</h4>
+    <h4>About The Project</h4>
 
     <p>
-        An intelligent learning platform that leverages
-        Artificial Intelligence and Natural Language Processing
-        to transform study materials into summaries,
-        quizzes, and interactive learning experiences.
+        AI Teacher Assistant is an educational technology platform built using
+        Django, Python, Gemini AI, NLP, and SQLite. The system helps students
+        transform study materials into summaries, quizzes, and AI-powered
+        learning experiences while tracking academic progress through analytics.
     </p>
 
     <p>
-        Powered by Django, Gemini AI, NLP, SQLite,
-        and deployed on Render.
+        Designed, developed, and deployed as a full-stack AI application
+        integrating document analysis, question answering, quiz generation,
+        performance tracking, and intelligent educational assistance.
     </p>
 
 </div>

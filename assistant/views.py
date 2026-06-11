@@ -12,6 +12,7 @@ from .chat_utils import ask_question
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from django.db.models import Avg, Max
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -68,6 +69,7 @@ def login_view(request):
 
 from .models import UploadedDocument
 
+@login_required
 def dashboard(request):
 
     documents = UploadedDocument.objects.all()
@@ -104,6 +106,7 @@ def dashboard(request):
         }
     )
 
+@login_required
 def upload_document(request):
 
     if request.method == "POST":
@@ -161,6 +164,7 @@ def upload_document(request):
     )
 
 
+@login_required
 def quiz_page(request):
 
     documents = UploadedDocument.objects.all().order_by(
@@ -235,6 +239,7 @@ def quiz_page(request):
         }
     )
 
+@login_required
 def summary_page(request):
 
     documents = UploadedDocument.objects.exclude(
@@ -250,9 +255,11 @@ def summary_page(request):
     )
 
 
+@login_required
 def profile_page(request):
     return render(request, 'profile.html')
 
+@login_required
 def quiz_results(request):
 
     results = QuizResult.objects.all().order_by(
@@ -274,6 +281,7 @@ def start_learning(request):
 
     return redirect('login')
 
+@login_required
 def chat_page(request):
 
     documents = UploadedDocument.objects.all()
@@ -314,8 +322,8 @@ def chat_page(request):
         }
     )
 
+@login_required
 def download_summary(request, doc_id):
-
     document = UploadedDocument.objects.get(
         id=doc_id
     )

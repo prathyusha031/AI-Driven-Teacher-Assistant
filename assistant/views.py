@@ -128,14 +128,14 @@ def upload_document(request):
 
             try:
                 summary = generate_summary(
-                    pdf_text[:10000]
+                    pdf_text[:3000]
                 )
             except Exception as e:
                 summary = f"Summary Error: {str(e)}"
 
             try:
                 quiz = generate_quiz(
-                    pdf_text[:10000]
+                    pdf_text[:3000]
                 )
             except Exception as e:
                 quiz = f"Quiz Error: {str(e)}"

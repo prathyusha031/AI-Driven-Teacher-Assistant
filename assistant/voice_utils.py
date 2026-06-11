@@ -9,6 +9,6 @@ def extract_pdf_text(pdf_path):
         reader = PyPDF2.PdfReader(file)
 
         for page in reader.pages:
-            text += page.extract_text() or ""
+           text += (page.extract_text() or "")
 
     return text

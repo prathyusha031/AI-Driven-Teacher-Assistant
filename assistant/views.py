@@ -130,20 +130,15 @@ def upload_document(request):
                 summary = generate_summary(
                     pdf_text[:10000]
                 )
-            except Exception:
-                summary = """
-                   Gemini API quota exceeded.
-                   Please try again later.
-                   """
+            except Exception as e:
+                summary = f"Summary Error: {str(e)}"
+
             try:
                 quiz = generate_quiz(
                     pdf_text[:10000]
                 )
-            except Exception:
-                quiz = """
-                   Quiz generation unavailable.
-                   Gemini quota exceeded.
-                   """
+            except Exception as e:
+                quiz = f"Quiz Error: {str(e)}"
 
 
             document.summary = summary

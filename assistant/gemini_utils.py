@@ -2,29 +2,44 @@ import os
 from dotenv import load_dotenv
 import google.generativeai as genai
 
-# Load .env file
 load_dotenv()
 
-# Configure Gemini
 genai.configure(
     api_key=os.getenv("GEMINI_API_KEY")
 )
 
-# Create model
-model = genai.GenerativeModel("gemini-2.5-flash")
+model = genai.GenerativeModel(
+    "gemini-2.5-flash"
+)
 
 def generate_summary(text):
-    """
-    Generate summary from extracted PDF text
-    """
 
     prompt = f"""
-    Summarize the following study material in a simple and student-friendly way.
+Summarize the following study material in a simple,
+student-friendly format.
 
-    Study Material:
-    {text}
-    """
+Use:
+- Key Points
+- Important Concepts
+- Short Explanation
 
-    response = model.generate_content(prompt)
+Study Material:
+{text[:4000]}
+"""
 
-    return response.text
+    try:
+
+        response = model.generate_content(
+            prompt
+        )
+
+        return response.text
+
+    except Exception as e:
+
+        print("SUMMARY ERROR:", e)
+
+        return (
+            "Gemini API quota exceeded or service unavailable. "
+            "Please try again later."
+        )

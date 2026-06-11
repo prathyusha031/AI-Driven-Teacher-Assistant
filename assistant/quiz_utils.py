@@ -1,5 +1,5 @@
-import google.generativeai as genai
 import os
+import google.generativeai as genai
 
 genai.configure(
     api_key=os.getenv("GEMINI_API_KEY")
@@ -14,20 +14,10 @@ def generate_quiz(text):
     prompt = f"""
 Create exactly 5 multiple-choice questions from the following text.
 
-Use this format strictly:
+Format strictly:
 
 Q1.
-Question text
-
-A) Option A
-B) Option B
-C) Option C
-D) Option D
-
-Answer: C
-
-Q2.
-Question text
+Question
 
 A) Option A
 B) Option B
@@ -35,28 +25,46 @@ C) Option C
 D) Option D
 
 Answer: A
+
+Q2.
+Question
+
+A) Option A
+B) Option B
+C) Option C
+D) Option D
+
+Answer: B
 
 Continue until Q5.
 
-Important Rules:
-- Generate exactly 5 questions.
-- Each question must have 4 options (A, B, C, D).
-- Every question MUST include an answer line.
-- Answer line format must be exactly:
+Rules:
+- Exactly 5 questions
+- 4 options each
+- Must include Answer line
+- Answer format exactly:
 Answer: A
-or
 Answer: B
-or
 Answer: C
-or
 Answer: D
 
 Text:
-{text}
+{text[:4000]}
 """
 
-    response = model.generate_content(
-        prompt
-    )
+    try:
 
-    return response.text
+        response = model.generate_content(
+            prompt
+        )
+
+        return response.text
+
+    except Exception as e:
+
+        print("QUIZ ERROR:", e)
+
+        return (
+            "Quiz generation unavailable. "
+            "Gemini API quota exceeded."
+        )

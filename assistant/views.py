@@ -194,6 +194,8 @@ def quiz_page(request):
             document.quiz
         )
 
+        print("Correct Answers:", correct_answers)
+
         user_answers = [
             request.POST.get("q1"),
             request.POST.get("q2"),
@@ -201,6 +203,8 @@ def quiz_page(request):
             request.POST.get("q4"),
             request.POST.get("q5"),
         ]
+
+        print("User Answers:", user_answers)
 
         score = 0
 

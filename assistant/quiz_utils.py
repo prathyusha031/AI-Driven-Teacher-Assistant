@@ -12,19 +12,44 @@ def generate_quiz(text):
     )
 
     prompt = f"""
-Create 5 multiple-choice questions from the following text.
+Create exactly 5 multiple-choice questions from the following text.
 
-Format:
+Use this format strictly:
 
 Q1.
-Question
+Question text
 
-A)
-B)
-C)
-D)
+A) Option A
+B) Option B
+C) Option C
+D) Option D
 
-Do NOT show the answers.
+Answer: C
+
+Q2.
+Question text
+
+A) Option A
+B) Option B
+C) Option C
+D) Option D
+
+Answer: A
+
+Continue until Q5.
+
+Important Rules:
+- Generate exactly 5 questions.
+- Each question must have 4 options (A, B, C, D).
+- Every question MUST include an answer line.
+- Answer line format must be exactly:
+Answer: A
+or
+Answer: B
+or
+Answer: C
+or
+Answer: D
 
 Text:
 {text}

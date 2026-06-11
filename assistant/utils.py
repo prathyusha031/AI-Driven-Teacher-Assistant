@@ -3,12 +3,12 @@ import re
 def extract_answers(quiz_text):
 
     answers = re.findall(
-        r'Answer:\s*([A-D])',
+        r'(?:Answer|Correct Answer)\s*[:\-]?\s*\(?([A-D])\)?',
         quiz_text,
         re.IGNORECASE
     )
 
-    return answers
+    return [a.upper() for a in answers]
 
 
 def parse_quiz(quiz_text):

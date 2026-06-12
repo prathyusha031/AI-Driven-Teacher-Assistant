@@ -127,19 +127,16 @@ def upload_document(request):
             from .quiz_utils import generate_quiz
 
             try:
-                summary = generate_summary(
-                    pdf_text[:10000]
-                )
-            except Exception as e:
-                summary = f"Summary Error: {str(e)}"
-
+               summary = generate_summary(pdf_text[:10000])
+            
+            except Exception:
+               summary = ""
+            
             try:
-                quiz = generate_quiz(
-                    pdf_text[:10000]
-                )
-            except Exception as e:
-                quiz = f"Quiz Error: {str(e)}"
-
+               quiz = generate_quiz(pdf_text[:10000])
+            
+            except Exception:
+               quiz = ""
 
             document.summary = summary
             document.quiz = quiz
@@ -178,12 +175,12 @@ def quiz_page(request):
 
      if doc.quiz:
 
-        doc.parsed_questions = parse_quiz(doc.quiz)
-
         print("QUIZ TEXT:")
         print(doc.quiz)
 
-        print("PARSED:")
+        doc.parsed_questions = parse_quiz(doc.quiz)
+
+        print("PARSED QUESTIONS:")
         print(doc.parsed_questions)
 
     if request.method == "POST":

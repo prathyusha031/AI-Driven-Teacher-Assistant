@@ -9,7 +9,7 @@ genai.configure(
 )
 
 model = genai.GenerativeModel(
-    "gemini-2.5-flash"
+    "gemini-1.5-flash"
 )
 
 def generate_summary(text):
@@ -37,6 +37,6 @@ Study Material:
 
     except Exception as e:
      
-     print("SUMMARY ERROR:", e)
+     print("API KEY:", os.getenv("GEMINI_API_KEY"))
     
     return str(e)
